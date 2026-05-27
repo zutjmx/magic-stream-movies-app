@@ -5,17 +5,22 @@ import (
 )
 
 type Genre struct {
-	ID   bson.ObjectID `json:"id"`
-	Name string        `json:"name"`
+	ID   int    `bson:"genre_id" json:"genre_id"`
+	Name string `bson:"genre_name" json:"genre_name"`
+}
+
+type Ranking struct {
+	RankingValue int    `bson:"ranking_value" json:"ranking_value"`
+	RankingName  string `bson:"ranking_name" json:"ranking_name"`
 }
 
 type Movie struct {
-	ID          bson.ObjectID `json:"id"`
-	ImdbID      string        `json:"imdb_id"`
-	Title       string        `json:"title"`
-	PosterPath  string        `json:"poster_path"`
-	YoutubeID   string        `json:"youtube_id"`
-	Genres      []Genre       `json:"genres"`
-	Description string        `json:"description"`
-	Year        int           `json:"year"`
+	ID          bson.ObjectID `bson:"_id" json:"_id"`
+	ImdbID      string        `bson:"imdb_id" json:"imdb_id"`
+	Title       string        `bson:"title" json:"title"`
+	PosterPath  string        `bson:"poster_path" json:"poster_path"`
+	YoutubeID   string        `bson:"youtube_id" json:"youtube_id"`
+	Genres      []Genre       `bson:"genre" json:"genre"`
+	AdminReview string        `bson:"admin_review" json:"admin_review"`
+	Ranking     Ranking       `bson:"ranking" json:"ranking"`
 }
