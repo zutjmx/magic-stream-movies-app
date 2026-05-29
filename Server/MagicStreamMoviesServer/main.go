@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+
+	controller "zutjmx.com/Zutjmx/MagicStreamMovies/Server/MagicStreamMoviesServer/controllers"
 )
 
 func main() {
@@ -16,11 +18,7 @@ func main() {
 		})
 	})
 
-	router.GET("/movies", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Lista de películas",
-		})
-	})
+	router.GET("/movies", controller.GetMovies())
 
 	if err := router.Run(":8080"); err != nil {
 		fmt.Printf("Error al iniciar el servidor: %v\n", err)
