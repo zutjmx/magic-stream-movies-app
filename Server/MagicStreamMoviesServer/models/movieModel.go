@@ -5,22 +5,22 @@ import (
 )
 
 type Genre struct {
-	ID   int    `bson:"genre_id" json:"genre_id"`
-	Name string `bson:"genre_name" json:"genre_name"`
+	ID   int    `bson:"genre_id" json:"genre_id" validate:"required"`
+	Name string `bson:"genre_name" json:"genre_name" validate:"required, min=2, max=100"`
 }
 
 type Ranking struct {
-	RankingValue int    `bson:"ranking_value" json:"ranking_value"`
-	RankingName  string `bson:"ranking_name" json:"ranking_name"`
+	RankingValue int    `bson:"ranking_value" json:"ranking_value" validate:"required"`
+	RankingName  string `bson:"ranking_name" json:"ranking_name" validate:"required"`
 }
 
 type Movie struct {
 	ID          bson.ObjectID `bson:"_id" json:"_id"`
-	ImdbID      string        `bson:"imdb_id" json:"imdb_id"`
-	Title       string        `bson:"title" json:"title"`
-	PosterPath  string        `bson:"poster_path" json:"poster_path"`
-	YoutubeID   string        `bson:"youtube_id" json:"youtube_id"`
-	Genres      []Genre       `bson:"genre" json:"genre"`
-	AdminReview string        `bson:"admin_review" json:"admin_review"`
-	Ranking     Ranking       `bson:"ranking" json:"ranking"`
+	ImdbID      string        `bson:"imdb_id" json:"imdb_id" validate:"required"`
+	Title       string        `bson:"title" json:"title" validate:"required, min=1, max=500"`
+	PosterPath  string        `bson:"poster_path" json:"poster_path" validate:"required, url"`
+	YoutubeID   string        `bson:"youtube_id" json:"youtube_id" validate:"required"`
+	Genres      []Genre       `bson:"genre" json:"genre" validate:"required, dive"`
+	AdminReview string        `bson:"admin_review" json:"admin_review" validate:"required"`
+	Ranking     Ranking       `bson:"ranking" json:"ranking" validate:"required"`
 }
